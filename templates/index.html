@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screen Scraping Example</title>
+</head>
+<body>
+    <h1>Screen Scraping Example</h1>
+    
+    <label for="url">Enter URL to scrape:</label>
+    <input type="text" id="url" required>
+    <button onclick="scrapeAndDisplay()">Scrape and Display</button>
+
+    <br>
+
+    <label for="result">Scraped Text:</label>
+    <textarea id="result" rows="10" cols="50" readonly></textarea>
+
+    <script>
+        function scrapeAndDisplay() {
+            var url = document.getElementById("url").value;
+
+            // Perform the screen scraping using fetch
+            fetch('/scrape?url=' + encodeURIComponent(url))
+                .then(response => response.text())
+                .then(data => {
+                    // Update the content of the result textarea
+                    document.getElementById("result").value = data;
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
